@@ -1,7 +1,61 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
+User.create(username: "ghostskwad", password: "1234")
+
+Character.create(level: 54, klass: "Caster", health: 2745, constitution: 47, strength: 27, dexterity: 78, intelligence: 150)
+Equipment.create(name: "Crown of the Three", slot: "head", modifier_type: "intelligence", modifier_value: 87)
+Equipment.create(name: "Cloak of the Three", slot: "body", modifier_type: "constitution", modifier_value: 15)
+Equipment.create(name: "Divine Khakis", slot: "legs", modifier_type: "constitution", modifier_value: 5)
+Equipment.create(name: "Blessed Boots", slot: "feet", modifier_type: "constitution", modifier_value: 10)
+Equipment.create(name: "Staff of the Three", slot: "main-hand", modifier_type: "intelligence", modifier_value: 100)
+EquipmentSlot.create(equipment_id: 1, wearer_type: "Character", wearer_id: 1)
+EquipmentSlot.create(equipment_id: 2, wearer_type: "Character", wearer_id: 1)
+EquipmentSlot.create(equipment_id: 3, wearer_type: "Character", wearer_id: 1)
+EquipmentSlot.create(equipment_id: 4, wearer_type: "Character", wearer_id: 1)
+EquipmentSlot.create(equipment_id: 5, wearer_type: "Character", wearer_id: 1)
+Spell.create(name: "Heal", value: 100, flavor_text: "Recovers health to the target")
+Spell.create(name: "Singe", value: 75, flavor_text: "Deals fire damage to the target")
+Spell.create(name: "Glacier", value: 75, flavor_text: "Deals ice to the target")
+Spell.create(name: "Miasma", value: 25, flavor_text: "Poisons the target")
+Spell.create(name: "Holy", value: 100000, flavor_text: "Devine Judgement!")
+SpellSlot.create(spell_id: 1, caster_type: "Character", caster_id: 1)
+SpellSlot.create(spell_id: 2, caster_type: "Character", caster_id: 1)
+SpellSlot.create(spell_id: 3, caster_type: "Character", caster_id: 1)
+SpellSlot.create(spell_id: 4, caster_type: "Character", caster_id: 1)
+SpellSlot.create(spell_id: 5, caster_type: "Character", caster_id: 1)
+
+
+
+Character.create(name: "Decker", pronoun: "he", level: 72, klass: "Paladin", health: 8980, constitution: 85, strength: 83, dexterity: 58, intelligence: 48, player_id: 1)
+Equipment.create(name: "Godrick's Helm", slot: "head", modifier_type: "constitution", modifier_value: 8)
+Equipment.create(name: "Godrick's Chestplate", slot: "body", modifier_type: "constitution", modifier_value: 15)
+Equipment.create(name: "Godrick's Tights", slot: "legs", modifier_type: "constitution", modifier_value: 5)
+Equipment.create(name: "Godrick's Thighboots", slot: "feet", modifier_type: "constitution", modifier_value: 10)
+Equipment.create(name: "Shield of the Crucible", slot: "off-hand", modifier_type: "constitution", modifier_value: 25)
+Equipment.create(name: "Crucible Longsword", slot: "main-hand", modifier_type: "strength", modifier_value: 29)
+EquipmentSlot.create(equipment_id: 6, wearer_type: "Character", wearer_id: 2)
+EquipmentSlot.create(equipment_id: 7, wearer_type: "Character", wearer_id: 2)
+EquipmentSlot.create(equipment_id: 8, wearer_type: "Character", wearer_id: 2)
+EquipmentSlot.create(equipment_id: 9, wearer_type: "Character", wearer_id: 2)
+EquipmentSlot.create(equipment_id: 10, wearer_type: "Character", wearer_id: 2)
+EquipmentSlot.create(equipment_id: 11, wearer_type: "Character", wearer_id: 2)
+Spell.create(name: "Smite", value: 1500, flavor_text: "Summon's a holy judgement from the heavens" )
+SpellSlot.create(spell_id: 6, caster_type: "Character", caster_id: 2)
+
+Enemy.create(name: "The Rank", level: 93, health: 16000, constitution: 400, strength: 136, dexterity: 97, intelligence: 3)
+
+Enemy.create(name: "The Old One", level: ??, health: 27000, constitution: 358, strength: 113, dexterity: 99, intelligence: 113)
+Equipment.create(name: "Worn Hood", slot: "head", modifier_type: "constitution", modifier_value: 1)
+Equipment.create(name: "Bone Plate", slot: "body", modifier_type: "constitution", modifier_value: 5)
+Equipment.create(name: "Worn Pants", slot: "legs", modifier_type: "constitution", modifier_value: 2)
+Equipment.create(name: "Bone Thighboots", slot: "feet", modifier_type: "constitution", modifier_value: 4)
+Equipment.create(name: "The Reaper", slot: "main-hand", modifier_type: "strength", modifier_value: 20)
+EquipmentSlot.create(equipment_id: 12, wearer_type: "Enemy", wearer_id: 2)
+EquipmentSlot.create(equipment_id: 13, wearer_type: "Enemy", wearer_id: 2)
+EquipmentSlot.create(equipment_id: 14, wearer_type: "Enemy", wearer_id: 2)
+EquipmentSlot.create(equipment_id: 15, wearer_type: "Enemy", wearer_id: 2)
+EquipmentSlot.create(equipment_id: 16, wearer_type: "Enemy", wearer_id: 2)
+Spell.create(name: "Corruption", value: 50, flavor_text: "Corrupts the flesh, gradually rotting it.")
+Spell.create(name: "Sunder", value: 1500 , flavor_text: "Summons a dark dudgement from the pits of hell.")
+SpellSlot.create(spell_id: 7, caster_type: "Enemy", caster_id: 2)
+SpellSlot.create(spell_id: 8, caster_type: "Enemy", caster_id: 2)
+
+Save.create(user_id: 1, character_id: 1, boss1_type: "Enemy", boss1_id: 1, boss2_type: "Enemy", boss2_id: 2)
