@@ -1,12 +1,20 @@
 class CharactersController < ApplicationController
-    before_action :set_character, only: %i[show destroy]
+    before_action :set_character, only: %i[show show_modifiers destroy]
     
     def index
-        render json: Character.all, status: :ok
+        @user = User.find_by(id: session[:user_id])
+        if @user
+            @characters = @user.characters.all
+            render json: @characters, status: :ok
+        end
     end
 
     def show
-        render json: @character, status: :ok
+        render json: @character
+    end
+
+    def show_modifiers
+        render json: @character, serializer: ModifierSerializer, status: :ok
     end
 
     def create

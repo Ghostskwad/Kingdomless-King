@@ -1,6 +1,6 @@
 class UserSerializer < ActiveModel::Serializer
   attributes :id, :username, :password_digest
   
-  has_many :characters
-  has_many :enemies
+#   has_many :characters
+#   has_many :enemies
 end

@@ -1,4 +1,4 @@
-class Save < ApplicationRecord
+class State < ApplicationRecord
   belongs_to :user
   belongs_to :character, dependent: :destroy
   belongs_to :boss1, polymorphic: true, dependent: :destroy

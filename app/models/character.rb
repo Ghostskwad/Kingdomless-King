@@ -1,6 +1,6 @@
 class Character < ApplicationRecord
-  has_many :saves, dependent: :destroy
-  has_many :users, through: :saves
+  has_many :states, dependent: :destroy
+  has_many :users, through: :states
   has_many :siblings, class_name: "Character", foreign_key: :player_id, dependent: :destroy
   belongs_to :player, class_name: "Character", optional: true
   has_many :spell_slots, as: :caster, dependent: :destroy

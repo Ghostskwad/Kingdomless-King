@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_17_123738) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_19_154354) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -62,22 +62,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_17_123738) do
     t.index ["wearer_type", "wearer_id"], name: "index_equipment_slots_on_wearer"
   end
 
-  create_table "saves", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "character_id", null: false
-    t.string "boss1_type"
-    t.bigint "boss1_id"
-    t.string "boss2_type"
-    t.bigint "boss2_id"
-    t.integer "session", default: 1
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["boss1_type", "boss1_id"], name: "index_saves_on_boss1"
-    t.index ["boss2_type", "boss2_id"], name: "index_saves_on_boss2"
-    t.index ["character_id"], name: "index_saves_on_character_id"
-    t.index ["user_id"], name: "index_saves_on_user_id"
-  end
-
   create_table "spell_slots", force: :cascade do |t|
     t.bigint "spell_id", null: false
     t.string "caster_type"
@@ -96,6 +80,28 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_17_123738) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "states", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "character_id", null: false
+    t.string "boss1_type"
+    t.bigint "boss1_id"
+    t.string "boss2_type"
+    t.bigint "boss2_id"
+    t.integer "session", default: 1
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["boss1_type", "boss1_id"], name: "index_states_on_boss1"
+    t.index ["boss2_type", "boss2_id"], name: "index_states_on_boss2"
+    t.index ["character_id"], name: "index_states_on_character_id"
+    t.index ["user_id"], name: "index_states_on_user_id"
+  end
+
+  create_table "stories", force: :cascade do |t|
+    t.text "paragraph"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username", null: false
     t.string "password_digest", null: false
@@ -105,7 +111,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_17_123738) do
 
   add_foreign_key "characters", "characters", column: "player_id"
   add_foreign_key "equipment_slots", "equipment"
-  add_foreign_key "saves", "characters"
-  add_foreign_key "saves", "users"
   add_foreign_key "spell_slots", "spells"
+  add_foreign_key "states", "characters"
+  add_foreign_key "states", "users"
 end
