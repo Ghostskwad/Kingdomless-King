@@ -15,7 +15,7 @@ function EnemyProvider() {
 
     useEffect(() => {
     axios.get('/enemies/2').then(res => {setEnemy(res.data)})
-    axios.get('/enemies/1').then(res => {setEnemyHealth(res.data.health)})
+    axios.get('/enemies/2').then(res => {setEnemyHealth(res.data.health)})
     axios.get('/enemy_modifiers/1').then(res => {setEnemyModifiers(res.data)})
     }, [])
 

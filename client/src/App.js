@@ -36,7 +36,6 @@ function App() {
         </Route>
         <Route element={<CharacterProvider />}>
         <Route element={<EnemyProvider />}>
-          <Route element={<StoryProvider />} />
           <Route path ="/battle" element={<Battle />} />
         </Route>
         </Route>

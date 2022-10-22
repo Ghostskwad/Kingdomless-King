@@ -40,11 +40,11 @@ function CharacterProvider() {
     }, [])
    
 
-    const handleCharacterHealth = () => {
-        setCharacterHealth()
+    const handleCharacterHealth = (value) => {
+        setCharacterHealth(value)
     }
-    const handleSiblingHealth = () => {
-        setSiblingHealth()
+    const handleSiblingHealth = (value) => {
+        setSiblingHealth(value)
     }
 
     const handleSiblingModifiers = (id) => {

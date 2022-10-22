@@ -5,26 +5,31 @@ import Spells from './Spells'
 // import { useEnemy } from './EnemyContext'
 
 
-function DeckerUI() {
+function DeckerUI({ turn, handleTurns }) {
     const [show, setShow] = useState(false)
     const { sibling, siblingHealth, siblingModifiers, handleSiblingModifiers } = useCharacter()
     const { enemy, enemyHealth, enemyModifiers, handleEnemyHealth, handleEnemyModifiers } = useEnemy()
 
     const attack = () => {
+        let min = 0
+        let max = enemy.health
         handleSiblingModifiers(sibling.id)
         handleEnemyModifiers(enemy.id)
         
         let damage = (enemyHealth) - ((siblingModifiers.attack_damage) - (enemyModifiers.defense))
-        handleEnemyHealth(damage)
-
+        handleEnemyHealth(Math.min(Math.max(damage, min), max))
+        handleTurns()
     }
 
     const castSpell = (spell) => {
+        let min = 0
+        let max = enemy.health
         handleSiblingModifiers(sibling.id)
         handleEnemyModifiers(enemy.id)
 
         let damage = (enemyHealth) - ((siblingModifiers.spell_damage_bonus + spell.value) - (enemyModifiers.defense))
-        handleEnemyHealth(damage)
+        handleEnemyHealth(Math.min(Math.max(damage, min), max))
+        handleTurns()
     }
 
     const handleShow = () => {
@@ -43,9 +48,14 @@ function DeckerUI() {
             <h2>{sibling.klass}</h2>
             <h4>Level: {sibling.level}</h4>
             <h3>{siblingHealth}</h3>
+            {turn ===1 ?
+            <div>
             <button onClick={attack}>Attack</button>
             <button onClick={handleShow}>Spells</button>
             {showSpells()}
+            </div>
+            :
+            null}
             </div>
             :
             null}
