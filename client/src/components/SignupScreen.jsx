@@ -16,7 +16,7 @@ function SignupScreen ({setPlayer}) {
         setPassword(e.target.value)
     }
 
-  function onSubmit(e) {
+  function submit(e) {
     e.preventDefault()
 
     axios.post("/signup", {
@@ -30,17 +30,21 @@ function SignupScreen ({setPlayer}) {
   }
 
     return(
-    <div className="form">
-            <h2>Signup</h2>
-        <form onSubmit={onSubmit}>
-        <input placeholder="Username"type='text' name='username' value={username} onChange={(e) => handleUsernameChange(e)} />
-      <div></div>
-        <input placeholder="Password" type='password' name='password' value={password} onChange={(e) => handlePasswordChange(e)} />
-       
-       <div></div>
-        <input type='submit' value='Signup!' />
-      </form>
-         </div>
+      <form onSubmit={submit}>
+  
+      <div class="segment">
+        <h1>Sign up</h1>
+      </div>
+      
+      <label>
+        <input type="text" placeholder="Username" value={username} onChange={(e) => handleUsernameChange(e)}/>
+      </label>
+      <label>
+        <input type="password" placeholder="Password"value={password} onChange={(e) => handlePasswordChange(e)}/>
+      </label>
+      <button class="red" type="submit">Sign up</button>
+
+    </form>
   )}
 
   export default SignupScreen

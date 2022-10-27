@@ -14,8 +14,10 @@ function EnemyProvider() {
     const [enemyModifiers, setEnemyModifiers] = useState()
 
     useEffect(() => {
-    axios.get('/enemies/2').then(res => {setEnemy(res.data)})
-    axios.get('/enemies/2').then(res => {setEnemyHealth(res.data.health)})
+    axios.get('/enemies/1').then(res => {
+        setEnemy(res.data)
+        setEnemyHealth(res.data.health)
+    })
     axios.get('/enemy_modifiers/1').then(res => {setEnemyModifiers(res.data)})
     }, [])
 
@@ -23,13 +25,20 @@ function EnemyProvider() {
         setEnemyHealth(damage)
     }
 
-
     const handleEnemyModifiers = (id) => {
         axios.get(`/enemy_modifiers/${id}`).then(res => {setEnemyModifiers(res.data)})
     }
 
+    const getNewEnemy = () => {
+        axios.get('/enemies/2').then(res => {
+            setEnemy(res.data)
+            setEnemyHealth(res.data.health)
+        })
+    axios.get('/enemy_modifiers/2').then(res => {setEnemyModifiers(res.data)})
+    }
 
-    return <EnemyContext.Provider value={{ enemy, enemyModifiers, enemyHealth, handleEnemyModifiers, handleEnemyHealth }}>
+
+    return <EnemyContext.Provider value={{ enemy, enemyModifiers, enemyHealth, handleEnemyModifiers, handleEnemyHealth, getNewEnemy }}>
             <Outlet />
         </EnemyContext.Provider>
 }

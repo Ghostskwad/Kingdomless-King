@@ -2,6 +2,11 @@ import { useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
+import * as React from 'react';
+import { AwesomeButton } from "react-awesome-button"
+import 'react-awesome-button/dist/styles.css'
+import './Form.css'
+
 
 function LoginScreen ({setPlayer}) {
     const [username, setUsername] = useState('')
@@ -17,7 +22,7 @@ function LoginScreen ({setPlayer}) {
         setPassword(e.target.value)
     }
 
-  function onSubmit(e) {
+  function submit(e) {
     e.preventDefault()
 
     axios.post("/login", {
@@ -31,21 +36,26 @@ function LoginScreen ({setPlayer}) {
   }
 
     return(
-    <div className="form">
-            <h2>Log In</h2>
-        <form onSubmit={onSubmit}>
-        <input placeholder="Username"type='text' name='username' value={username} onChange={(e) => handleUsernameChange(e)} />
-      <div></div>
-        <input placeholder="Password" type='password' name='password' value={password} onChange={(e) => handlePasswordChange(e)} />
-       
-       <div></div>
-        <input type='submit' value='Log in!' />
-      </form>
+      <form onSubmit={submit}>
+  
+      <div class="segment">
+        <h1>Login</h1>
+      </div>
+      
+      <label>
+        <input type="text" placeholder="Username" value={username} onChange={(e) => handleUsernameChange(e)}/>
+      </label>
+      <label>
+        <input type="password" placeholder="Password"value={password} onChange={(e) => handlePasswordChange(e)}/>
+      </label>
+      <button class="red" type="submit">Log in</button>
+    
       <h3>
-        Don't have an account yet? Sign up!
+      Don't have an account yet? Sign up!
       </h3>
       <Link to="/signup">Sign up now!</Link>
-         </div>
+
+    </form>
   )}
 
   export default LoginScreen

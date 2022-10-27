@@ -2,7 +2,7 @@ import { useEnemy } from './EnemyContext'
 
 
 
-function EnemyUI({ handleTurns }) {
+function EnemyUI() {
     const { enemy, enemyHealth } = useEnemy()
   
 

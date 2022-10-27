@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useCharacter } from './CharacterContext'
+import { useSibling } from './DeckerContext'
 import { useEnemy } from './EnemyContext'
 import Spells from './Spells'
 // import { useEnemy } from './EnemyContext'
@@ -7,7 +7,7 @@ import Spells from './Spells'
 
 function DeckerUI({ turn, handleTurns }) {
     const [show, setShow] = useState(false)
-    const { sibling, siblingHealth, siblingModifiers, handleSiblingModifiers } = useCharacter()
+    const { sibling, siblingHealth, siblingModifiers, handleSiblingModifiers } = useSibling()
     const { enemy, enemyHealth, enemyModifiers, handleEnemyHealth, handleEnemyModifiers } = useEnemy()
 
     const attack = () => {
@@ -48,7 +48,7 @@ function DeckerUI({ turn, handleTurns }) {
             <h2>{sibling.klass}</h2>
             <h4>Level: {sibling.level}</h4>
             <h3>{siblingHealth}</h3>
-            {turn ===1 ?
+            {turn === 1 ?
             <div>
             <button onClick={attack}>Attack</button>
             <button onClick={handleShow}>Spells</button>

@@ -1,12 +1,14 @@
 import { useState } from 'react'
 import { useCharacter } from './CharacterContext'
+import { useSibling } from './DeckerContext'
 import { useEnemy } from './EnemyContext'
 import Spells from './Spells'
 
 
 function CharacterUI({ turn, handleTurns }) {
     const [show, setShow] = useState(false)
-    const { character, sibling, characterHealth, siblingHealth, characterModifiers, siblingModifiers, handleCharacterHealth, handleSiblingHealth, handleCharacterModifiers, handleSiblingModifiers } = useCharacter()
+    const { character, characterHealth, characterModifiers, handleCharacterHealth, handleCharacterModifiers } = useCharacter()
+    const { sibling, siblingHealth, siblingModifiers, handleSiblingHealth, handleSiblingModifiers } = useSibling()
     const { enemy, enemyHealth, enemyModifiers, handleEnemyHealth, handleEnemyModifiers } = useEnemy()
     
     
@@ -81,7 +83,7 @@ function CharacterUI({ turn, handleTurns }) {
             <h2>{character.klass}</h2>
             <h4>Level: {character.level}</h4>
             <h3>{characterHealth}</h3>
-            {turn === 3 ?
+            {turn === 4 ?
             <div>
             <button onClick={attack}>Attack</button>
             <button onClick={handleShow}>Spells</button>
