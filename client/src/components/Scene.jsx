@@ -1,12 +1,15 @@
 import { useStory } from './StoryContext'
 import { useNavigate } from 'react-router-dom'
+import {useParams} from 'react-router-dom'
 import Header from './Header'
 import Wave from 'react-wavify'
 import './CustomCss.css'
 
 function Scene (){
-    const [story, storyId, handleStoryId] = useStory()
+    const {scene1Paragraph, scene2Paragraph, handleScene1, handleScene2} = useStory()
+    const params = useParams()
     const navigate = useNavigate()
+    
 
     return(
         <div>
@@ -22,7 +25,8 @@ function Scene (){
                 points: 3
              }}
         />
-        <p onClick={handleStoryId}>{story}</p>
+        {params.id === '1' ? <p onClick={handleScene1}>{scene1Paragraph}</p> : null}
+        {params.id === '2' ? <p onClick={handleScene2}>{scene2Paragraph}</p> : null}
         </div>
         </div>
         </div>

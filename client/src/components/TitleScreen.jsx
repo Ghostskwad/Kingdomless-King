@@ -14,7 +14,7 @@ function TitleScreen({player, setPlayer}) {
     } 
 
     const handleClick = () => {
-        navigate('/scene')
+        navigate('/scene/1')
     }
 
     return(

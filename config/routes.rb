@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :scenes
   resources :states
   resources :stories, only: :show
   # resources :equipment_slots

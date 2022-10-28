@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useCharacter } from './CharacterContext'
 import { useSibling } from './DeckerContext'
 import { useEnemy } from './EnemyContext'
+import ProgressBar from "@ramonak/react-progress-bar"
 import Spells from './Spells'
 
 
@@ -83,6 +84,7 @@ function CharacterUI({ turn, handleTurns }) {
             <h2>{character.klass}</h2>
             <h4>Level: {character.level}</h4>
             <h3>{characterHealth}</h3>
+            {character ? <ProgressBar completed={characterHealth} maxCompleted={character.health} customLabel={character.name} bgColor="#D750F4"/> : null}
             {turn === 4 ?
             <div>
             <button onClick={attack}>Attack</button>
