@@ -7,6 +7,13 @@ class UsersController < ApplicationController
 
     def create 
         user = User.create!(user_params)
+        State.create(
+            user_id: user.id, 
+            character_id: 1, 
+            boss1_type: "Enemy", 
+            boss1_id: 1, 
+            boss2_type: "Enemy", 
+            boss2_id: 2)
         session[:user_id] = user.id 
         render json: user, status: :created
     end

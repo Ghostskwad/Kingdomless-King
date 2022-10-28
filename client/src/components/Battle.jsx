@@ -5,8 +5,9 @@ import EnemyUI from "./EnemyUI";
 import { useEnemy } from "./EnemyContext"
 import { useCharacter } from './CharacterContext'
 import { useSibling } from './DeckerContext'
+import { useStory } from './StoryContext';
 import { useNavigate } from 'react-router-dom';
-// import "./Battle.css"
+import "./Battle.css"
 
 function Battle() {
 const [turn, setTurn] = useState(0)
@@ -139,50 +140,51 @@ const handleTurn = () => {
             setTurn(0)
         }
     if (turn && siblingHealth === 0 && characterHealth === 0)
-        {navigate('/scene')}
+        {navigate('/title-screen')}
     if (enemy) {
         if (enemy.name === "The Rank" && enemyHealth === 0) 
-        {getNewEnemy()
-        navigate('/scene')}
+        {navigate('/scene/2')
+        getNewEnemy()}
         else if (enemy.name === "The Old One" && enemyHealth === 0) 
-            {navigate('/scene')}}
+            {navigate('/scene/3')}}
 
 
 
     return (
         <div>
-            <EnemyUI />
-            <div id="thing3">
-            <DeckerUI turn={turn} handleTurns={handleTurns}/>
-            </div>
-            <div class="char1">
-            <CharacterUI turn={turn} handleTurns={handleTurns}/>
-            </div>
-            {/* <div class="container">
-  <div class="box">
+           
+            <div class="container">
+            
+  <div class="box" id="decker">
     <span></span>
     <div class="content">
     <DeckerUI turn={turn} handleTurns={handleTurns}/>
-      <a href="#">Read More</a>
+      {/* <a href="#">Read More</a> */}
     </div>
   </div>
-  <div class="box">
+  <div class="box" id="blake">
     <span></span>
     <div class="content">
     <CharacterUI turn={turn} handleTurns={handleTurns}/>
-      <a href="#">Read More</a>
+      {/* <a href="#">Read More</a> */}
     </div>
   </div>
-  <div class="box">
+  <div class="box" id="boss">
     <span></span>
     <div class="content">
     <EnemyUI />
-      <a href="#">Read More</a>
+      {/* <a href="#">Read More</a> */}
     </div>
   </div>
-</div> */}
+</div>
+
+
         </div>
+
+        
     )
 }
 
 export default Battle
+
+

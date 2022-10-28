@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useSibling } from './DeckerContext'
 import { useEnemy } from './EnemyContext'
+import ProgressBar from "@ramonak/react-progress-bar"
 import Spells from './Spells'
 // import { useEnemy } from './EnemyContext'
 
@@ -48,6 +49,7 @@ function DeckerUI({ turn, handleTurns }) {
             <h2>{sibling.klass}</h2>
             <h4>Level: {sibling.level}</h4>
             <h3>{siblingHealth}</h3>
+            {sibling ? <ProgressBar completed={siblingHealth} maxCompleted={sibling.health} customLabel={sibling.name} bgColor="#EB9612"/> : null}
             {turn === 1 ?
             <div>
             <button onClick={attack}>Attack</button>

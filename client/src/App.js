@@ -33,12 +33,12 @@ function App() {
         <Route path ="/" element={<LoginScreen player={player} setPlayer={setPlayer}/>} />
         <Route path ="/signup" element={<SignupScreen setPlayer={setPlayer}/>} />
         <Route element={<StoryProvider />}>
-          <Route path ="/scene" element={<Scene player={player} setPlayer={setPlayer}/>} />
-        </Route>
         <Route element={<CharacterProvider />}>
         <Route element={<DeckerProvider />}>
         <Route element={<EnemyProvider />}>
+          <Route path ="/scene/:id" element={<Scene player={player} setPlayer={setPlayer}/>} />
           <Route path ="/battle" element={<Battle />} />
+        </Route>
         </Route>
         </Route>
         </Route>
