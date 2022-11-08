@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useSibling } from './DeckerContext'
 import { useEnemy } from './EnemyContext'
+import { useAnimation } from './AttackAnimation'
 import ProgressBar from "@ramonak/react-progress-bar"
 import Spells from './Spells'
 // import { useEnemy } from './EnemyContext'
@@ -10,6 +11,7 @@ function DeckerUI({ turn, handleTurns }) {
     const [show, setShow] = useState(false)
     const { sibling, siblingHealth, siblingModifiers, handleSiblingModifiers } = useSibling()
     const { enemy, enemyHealth, enemyModifiers, handleEnemyHealth, handleEnemyModifiers } = useEnemy()
+    const { handleAnimation } = useAnimation()
 
     const attack = () => {
         let min = 0
@@ -20,6 +22,7 @@ function DeckerUI({ turn, handleTurns }) {
         let damage = (enemyHealth) - ((siblingModifiers.attack_damage) - (enemyModifiers.defense))
         handleEnemyHealth(Math.min(Math.max(damage, min), max))
         handleTurns()
+        handleAnimation('Attack')
     }
 
     const castSpell = (spell) => {
@@ -31,6 +34,8 @@ function DeckerUI({ turn, handleTurns }) {
         let damage = (enemyHealth) - ((siblingModifiers.spell_damage_bonus + spell.value) - (enemyModifiers.defense))
         handleEnemyHealth(Math.min(Math.max(damage, min), max))
         handleTurns()
+        handleAnimation('Spell')
+        
     }
 
     const handleShow = () => {

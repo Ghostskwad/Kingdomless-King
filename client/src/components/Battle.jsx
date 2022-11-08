@@ -111,6 +111,7 @@ const handleTurn = () => {
         }
             
     }
+    setTurn(3)
     }
     
     const handleTurns = () => {
@@ -130,8 +131,8 @@ const handleTurn = () => {
             setTurn(2)
         }
     if (turn === 2 && enemyHealth > 0) {
-        handleTurn()
-        setTurn(3)
+       setTimeout(handleTurn, 2000) 
+        // setTimeout(setTurn(3), 3000)
     }
     if (turn === 3 && characterHealth > 0) {
         setTurn(4)
@@ -151,7 +152,7 @@ const handleTurn = () => {
 
 
     return (
-        <div>
+        <div class='battle1'>
            
             <div class="container">
             
@@ -172,6 +173,7 @@ const handleTurn = () => {
   <div class="box" id="boss">
     <span></span>
     <div class="content">
+    <div id='animation-box'>  </div>
     <EnemyUI />
       {/* <a href="#">Read More</a> */}
     </div>

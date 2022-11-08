@@ -4,6 +4,7 @@ import { StoryProvider } from './components/StoryContext'
 import { CharacterProvider } from './components/CharacterContext'
 import { DeckerProvider } from './components/DeckerContext'
 import { EnemyProvider } from './components/EnemyContext'
+import { AnimationProvider } from './components/AttackAnimation'
 import axios from 'axios'
 import LoginScreen from './components/LoginScreen'
 import SignupScreen from './components/SignupScreen'
@@ -37,7 +38,9 @@ function App() {
         <Route element={<DeckerProvider />}>
         <Route element={<EnemyProvider />}>
           <Route path ="/scene/:id" element={<Scene player={player} setPlayer={setPlayer}/>} />
+          <Route element={<AnimationProvider />}>
           <Route path ="/battle" element={<Battle />} />
+          </Route>
         </Route>
         </Route>
         </Route>

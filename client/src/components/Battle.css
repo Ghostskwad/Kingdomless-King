@@ -239,3 +239,73 @@
   border: 1px solid rgba(255, 0, 88, 0.4);
   box-shadow: 0 1px 15px rgba(1, 1, 1, 0.2);
 }/*# sourceMappingURL=Battle.css.map */
+
+#animation-box {
+  position: absolute;
+  pointer-events: none;
+  height: 400px;
+  width: 400px;
+  /* border: 2px solid red; */
+  top: 15%;
+  left: -75px
+}
+
+.animate-attack {
+  position: absolute;
+  pointer-events: none;
+  height: 70%;
+  width: 70%;
+  top: 12%;
+  right:30%;
+  opacity: 0;
+  animation: attack 1.8s;
+  animation-fill-mode: forwards;
+  
+  
+}
+
+@keyframes attack {
+  0% {
+    opacity:0;
+    transform: rotate(-15deg)
+    
+    
+  }
+  20% {
+    opacity: 1;
+    transform: rotate(20deg);
+    
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(20deg)
+  }
+}
+
+.animate-spell {
+  position: absolute;
+  pointer-events: none;
+  height: 40%;
+  width: 40%;
+  top: 30%;
+  right: 30%;
+  opacity: 0;
+  animation: spell 1.8s;
+  animation-fill-mode: forwards;
+  
+}
+
+@keyframes spell {
+  0% {
+    opacity:.4;
+    
+    
+  }
+  20% {
+    opacity: 1;
+    
+  }
+  100% {
+    opacity: 0
+  }
+}

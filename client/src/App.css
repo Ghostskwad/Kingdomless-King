@@ -2,9 +2,9 @@
   text-align: center;
 }
 
-html {
+/* html {
   background: url('./images/Story background.jpg') no-repeat center center ;
- }
+ } */
 
 .App-logo {
   height: 40vmin;
@@ -74,3 +74,4 @@ html {
   --button-danger-color-active: #37a343;
   --button-danger-border: 2px solid #d2e054;
 }
+

@@ -1,5 +1,5 @@
+import {useEffect, useRef} from 'react'
 import { useStory } from './StoryContext'
-import { useNavigate } from 'react-router-dom'
 import {useParams} from 'react-router-dom'
 import Header from './Header'
 import Wave from 'react-wavify'
@@ -8,7 +8,12 @@ import './CustomCss.css'
 function Scene (){
     const {scene1Paragraph, scene2Paragraph, handleScene1, handleScene2} = useStory()
     const params = useParams()
-    const navigate = useNavigate()
+
+    const ref = useRef(null);
+
+    useEffect(() => {
+        ref.current.focus();
+      }, []);
     
 
     return(
@@ -25,8 +30,8 @@ function Scene (){
                 points: 3
              }}
         />
-        {params.id === '1' ? <p onClick={handleScene1}>{scene1Paragraph}</p> : null}
-        {params.id === '2' ? <p onClick={handleScene2}>{scene2Paragraph}</p> : null}
+        {params.id === '1' ? <p ref={ref} tabIndex={0} onKeyUp={(e) => handleScene1(e)}>{scene1Paragraph}</p> : null}
+        {params.id === '2' ? <p ref={ref} tabIndex={0} onKeyUp={(e) => handleScene2 (e)}>{scene2Paragraph}</p> : null}
         </div>
         </div>
         </div>

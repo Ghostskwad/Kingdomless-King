@@ -31,19 +31,23 @@ function StoryProvider() {
     }, [])
 
 console.log(scene2)
-    const handleScene1 = () => {
-        setScene1Id(scene1Id + 1)
-        if (scene1.map(scene => scene.id).includes(scene1Id)){
-        setScene1Paragraph(scene1.filter(scene => scene.id === scene1Id)[0].paragraph)
-        }
+    const handleScene1 = (e) => {
+        if (e.key === "Enter") {
+            setScene1Id(scene1Id + 1)
+            if (scene1.map(scene => scene.id).includes(scene1Id)){
+                setScene1Paragraph(scene1.filter(scene => scene.id === scene1Id)[0].paragraph)
+            }
             else {navigate('/battle')}
+        }
     }
-    const handleScene2 = () => {
-        setScene2Id(scene2Id + 1)
-        if (scene2.map(scene => scene.id).includes(scene2Id)){
-        setScene2Paragraph(scene2.filter(scene => scene.id === scene2Id)[0].paragraph)
-        }
+    const handleScene2 = (e) => {
+        if (e.key === "Enter") {
+            setScene2Id(scene2Id + 1)
+            if (scene2.map(scene => scene.id).includes(scene2Id)){
+                setScene2Paragraph(scene2.filter(scene => scene.id === scene2Id)[0].paragraph)
+            }
             else {navigate('/battle')}
+        }
     }
     
 

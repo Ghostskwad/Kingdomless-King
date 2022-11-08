@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useCharacter } from './CharacterContext'
 import { useSibling } from './DeckerContext'
 import { useEnemy } from './EnemyContext'
+import { useAnimation } from './AttackAnimation'
 import ProgressBar from "@ramonak/react-progress-bar"
 import Spells from './Spells'
 
@@ -11,6 +12,7 @@ function CharacterUI({ turn, handleTurns }) {
     const { character, characterHealth, characterModifiers, handleCharacterHealth, handleCharacterModifiers } = useCharacter()
     const { sibling, siblingHealth, siblingModifiers, handleSiblingHealth, handleSiblingModifiers } = useSibling()
     const { enemy, enemyHealth, enemyModifiers, handleEnemyHealth, handleEnemyModifiers } = useEnemy()
+    const { handleAnimation } = useAnimation()
     
     
     const attack = () => {
@@ -19,9 +21,10 @@ function CharacterUI({ turn, handleTurns }) {
         handleCharacterModifiers(character.id)
         handleEnemyModifiers(enemy.id)
         
-        let damage = (enemyHealth) - ((characterModifiers.attack_damage) - (enemyModifiers.defense))
+        let damage = (enemyHealth) - (Math.max((characterModifiers.attack_damage) - (enemyModifiers.defense)), 0)
         handleEnemyHealth(Math.min(Math.max(damage, min), max))
         handleTurns()
+        handleAnimation('Attack')
 
     }
 
@@ -30,19 +33,18 @@ function CharacterUI({ turn, handleTurns }) {
 
         if (spell.name === 'Heal') {
             handleCharacterModifiers(character.id)
-            handleSiblingModifiers(sibling.id)
 
             if (siblingHealth > 0) {
                 let min = 0
                 let max = sibling.health
-                let healing = (siblingHealth) + ((characterModifiers.spell_damage_bonus + spell.value) - (siblingModifiers.defense))
+                let healing = (siblingHealth) + ((characterModifiers.spell_damage_bonus + spell.value))
                 handleSiblingHealth(Math.min(Math.max(healing, min), max))
                 console.log(siblingHealth)
             }
             if (characterHealth > 0) {
                 let min = 0
                 let max = character.health
-                let healing = (characterHealth) + ((characterModifiers.spell_damage_bonus) - (characterModifiers.defense))
+                let healing = (characterHealth) + ((characterModifiers.spell_damage_bonus))
                 handleCharacterHealth(Math.min(Math.max(healing, min), max))
             }
         }
@@ -56,6 +58,10 @@ function CharacterUI({ turn, handleTurns }) {
             handleEnemyHealth(Math.min(Math.max(damage, min), max))
         }
         handleTurns()
+        if (spell.name !== "Heal") {
+            
+            handleAnimation('Spell')
+        }
     }
 
     const handleShow = () => {
