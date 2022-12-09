@@ -5,15 +5,15 @@ import EnemyUI from "./EnemyUI";
 import { useEnemy } from "./EnemyContext"
 import { useCharacter } from './CharacterContext'
 import { useSibling } from './DeckerContext'
-import { useStory } from './StoryContext';
 import { useNavigate } from 'react-router-dom';
 import "./Battle.css"
 
 function Battle() {
 const [turn, setTurn] = useState(0)
 const navigate = useNavigate()
+const [poison, setPoison] = useState(0)
 
-const { enemy, enemyHealth, enemyModifiers, handleEnemyModifiers, getNewEnemy } = useEnemy()
+const { enemy, enemyHealth, enemyModifiers, handleEnemyModifiers, handleEnemyHealth, getNewEnemy } = useEnemy()
 const { character, characterHealth, characterModifiers, handleCharacterHealth, handleCharacterModifiers } = useCharacter()
 const { sibling, siblingHealth, siblingModifiers, handleSiblingHealth, handleSiblingModifiers } = useSibling()
 
@@ -125,6 +125,13 @@ const handleTurn = () => {
     
 
     if (turn === 0 && siblingHealth > 0) {
+        if (poison > 0) {
+            let min = 0
+            let max = enemy.health
+            let damage = enemyHealth - (enemy.health*.05)
+            handleEnemyHealth(Math.min(Math.max(damage, min), max))
+            setPoison(poison-1)
+        }
         setTurn(1)
     }
         else if (turn === 0 && siblingHealth === 0) {
@@ -149,7 +156,8 @@ const handleTurn = () => {
         else if (enemy.name === "The Old One" && enemyHealth === 0) 
             {navigate('/scene/3')}}
 
-
+console.log(poison)
+console.log(enemyHealth)
 
     return (
         <div class='battle1'>
@@ -166,8 +174,7 @@ const handleTurn = () => {
   <div class="box" id="blake">
     <span></span>
     <div class="content">
-    <CharacterUI turn={turn} handleTurns={handleTurns}/>
-      {/* <a href="#">Read More</a> */}
+    <CharacterUI turn={turn} handleTurns={handleTurns} setPoison={setPoison}/>
     </div>
   </div>
   <div class="box" id="boss">
@@ -175,7 +182,6 @@ const handleTurn = () => {
     <div class="content">
     <div id='animation-box'>  </div>
     <EnemyUI />
-      {/* <a href="#">Read More</a> */}
     </div>
   </div>
 </div>

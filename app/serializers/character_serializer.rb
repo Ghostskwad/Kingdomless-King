@@ -3,7 +3,6 @@ class CharacterSerializer < ActiveModel::Serializer
   
   has_many :spells
   has_many :siblings
-
 end
 
 
