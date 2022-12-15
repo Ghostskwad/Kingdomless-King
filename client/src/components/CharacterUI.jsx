@@ -7,10 +7,10 @@ import ProgressBar from "@ramonak/react-progress-bar"
 import Spells from './Spells'
 
 
-function CharacterUI({ turn, handleTurns, setPoison }) {
+function CharacterUI({ turn, handleTurns, setPoisonStatus }) {
     const [show, setShow] = useState(false)
     const { character, characterHealth, characterModifiers, handleCharacterHealth, handleCharacterModifiers } = useCharacter()
-    const { sibling, siblingHealth, siblingModifiers, handleSiblingHealth, handleSiblingModifiers } = useSibling()
+    const { sibling, siblingHealth, handleSiblingHealth } = useSibling()
     const { enemy, enemyHealth, enemyModifiers, handleEnemyHealth, handleEnemyModifiers } = useEnemy()
     const { handleAnimation } = useAnimation()
     
@@ -57,7 +57,7 @@ function CharacterUI({ turn, handleTurns, setPoison }) {
             let damage = (enemyHealth) - ((characterModifiers.spell_damage_bonus + spell.value) - (enemyModifiers.defense))
             handleEnemyHealth(Math.min(Math.max(damage, min), max))
             if (spell.name === "Miasma") {
-                setPoison(5)
+                setPoisonStatus(5)
             }
         }
         handleTurns()

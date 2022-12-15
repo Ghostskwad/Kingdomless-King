@@ -11,7 +11,7 @@ import "./Battle.css"
 function Battle() {
 const [turn, setTurn] = useState(0)
 const navigate = useNavigate()
-const [poison, setPoison] = useState(0)
+const [poisonStatus, setPoisonStatus] = useState(0)
 
 const { enemy, enemyHealth, enemyModifiers, handleEnemyModifiers, handleEnemyHealth, getNewEnemy } = useEnemy()
 const { character, characterHealth, characterModifiers, handleCharacterHealth, handleCharacterModifiers } = useCharacter()
@@ -118,35 +118,48 @@ const handleTurn = () => {
         if (turn === 1) {
             setTurn(2)}
         if (turn === 4) {
-            setTurn(0)
+            setTurn(5)
         }
     }
         
-    
+    const handlePoisonDamage = () => {
+        let min = 0
+        let max = enemy.health
+        let damage = enemyHealth - (enemy.health*.05)
+        handleEnemyHealth(Math.min(Math.max(damage, min), max))
+        setTurn(6)
+    }
+
+    const handlePoisonTurnDelay = () => {
+        setPoisonStatus(poisonStatus-1)
+        setTurn(0)
+    }
 
     if (turn === 0 && siblingHealth > 0) {
-        if (poison > 0) {
-            let min = 0
-            let max = enemy.health
-            let damage = enemyHealth - (enemy.health*.05)
-            handleEnemyHealth(Math.min(Math.max(damage, min), max))
-            setPoison(poison-1)
-        }
         setTurn(1)
     }
         else if (turn === 0 && siblingHealth === 0) {
             setTurn(2)
         }
     if (turn === 2 && enemyHealth > 0) {
-       setTimeout(handleTurn, 2000) 
+       setTimeout(handleTurn, 2000)
         // setTimeout(setTurn(3), 3000)
     }
     if (turn === 3 && characterHealth > 0) {
         setTurn(4)
     }
         else if (turn === 3 && characterHealth === 0) {
-            setTurn(0)
+            setTurn(5)
         }
+    if (turn === 5 && poisonStatus > 0) {
+        setTimeout(handlePoisonDamage, 2000)
+    }
+        else if (turn === 5 && poisonStatus === 0) {
+            setTimeout(() => {setTurn(0)}, 1000)
+        }
+    if (turn === 6) {
+        setTimeout(handlePoisonTurnDelay, 2000)
+    }
     if (turn && siblingHealth === 0 && characterHealth === 0)
         {navigate('/title-screen')}
     if (enemy) {
@@ -156,7 +169,7 @@ const handleTurn = () => {
         else if (enemy.name === "The Old One" && enemyHealth === 0) 
             {navigate('/scene/3')}}
 
-console.log(poison)
+console.log(poisonStatus)
 console.log(enemyHealth)
 
     return (
@@ -174,7 +187,7 @@ console.log(enemyHealth)
   <div class="box" id="blake">
     <span></span>
     <div class="content">
-    <CharacterUI turn={turn} handleTurns={handleTurns} setPoison={setPoison}/>
+    <CharacterUI turn={turn} handleTurns={handleTurns} setPoisonStatus={setPoisonStatus}/>
     </div>
   </div>
   <div class="box" id="boss">
